@@ -1,0 +1,3 @@
+name: HNBC-Chat
+version: '${version}'
+main: heyblock0712.hnbcchat.HNBC_Chat
