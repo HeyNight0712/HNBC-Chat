@@ -10,6 +10,7 @@ public final class HNBC_Chat extends Plugin {
     public void onEnable() {
         intention = this;
         ConfigManager.loadConfig();
+
         // Plugin startup logic
     }
 
