@@ -1,6 +1,7 @@
 package heyblock0712.hnbcchat;
 
 import heyblock0712.hnbcchat.cord.ConfigManager;
+import heyblock0712.hnbcchat.cord.DiscordManager;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public final class HNBC_Chat extends Plugin {
@@ -11,6 +12,7 @@ public final class HNBC_Chat extends Plugin {
         intention = this;
         ConfigManager.loadConfig();
 
+        DiscordManager.startBot();
         // Plugin startup logic
     }
 
