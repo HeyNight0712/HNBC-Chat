@@ -3,6 +3,7 @@ package heyblock0712.hnbcchat.cord;
 import heyblock0712.hnbcchat.HNBC_Chat;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public class DiscordManager {
@@ -25,5 +26,12 @@ public class DiscordManager {
         }
 
         plugin.getLogger().info("已獲取 TOKEN 將啟用 Discord 相關功能");
+    }
+
+    public static void sendMessage(String channelId, String message) {
+        if (jda == null) return;
+        TextChannel textChannel = jda.getTextChannelById(channelId);
+        if (textChannel == null) return;
+        textChannel.sendMessage(message).queue();
     }
 }
