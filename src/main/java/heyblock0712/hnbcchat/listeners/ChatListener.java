@@ -3,14 +3,13 @@ package heyblock0712.hnbcchat.listeners;
 import heyblock0712.hnbcchat.HNBC_Chat;
 import heyblock0712.hnbcchat.cord.ConfigManager;
 import heyblock0712.hnbcchat.cord.DiscordManager;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
-
-import java.awt.*;
 
 public class ChatListener implements Listener {
     @EventHandler
@@ -26,10 +25,11 @@ public class ChatListener implements Listener {
             HNBC_Chat.getIntention().getLogger().info(message);
 
             // 聊天互通
-            TextComponent chatMessage = new TextComponent("[" + serverName + "] <" + player.getName() + "> " + playerMessage);
+            TextComponent MinecraftToMinecraftMessage = formatMessage(serverName, player.getName(), playerMessage);
+
             for (ProxiedPlayer recipient : ProxyServer.getInstance().getPlayers()) {
                 if (!recipient.getServer().getInfo().getName().equals(serverName)) {
-                    recipient.sendMessage(chatMessage);
+                    recipient.sendMessage(MinecraftToMinecraftMessage);
                 }
             }
 
@@ -39,5 +39,16 @@ public class ChatListener implements Listener {
             if (channeID == null) return;
             DiscordManager.sendMessage(channeID, message);
         }
+
+    }
+
+    private TextComponent formatMessage(String serverName, String playerName, String playerMessage) {
+        String message = ConfigManager.getConfig().getString("MinecraftToMinecraft");
+        message = message
+                .replace("%server%", serverName)
+                .replace("%player_name%", playerName)
+                .replace("%player_message%", playerMessage);
+        message = ChatColor.translateAlternateColorCodes('&', message);
+        return new TextComponent(message);
     }
 }

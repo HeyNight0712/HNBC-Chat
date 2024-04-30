@@ -2,4 +2,17 @@
 BotToken: ""
 
 # 頻道設置
-Channels: { "" }
+# "global" - 全局聊天
+Channels: { "global": "" }
+
+# 用於聊天格式
+# MinecraftToMinecraft - MC 到 MC
+# MinecraftToDiscord - MC 到 DC
+# DiscordToMinecraft - DC 到 MC
+# 可用的字串符
+# %server% - 該玩家伺服器 (DC TO MC 不適用)
+# %player_name% - 玩家 ID
+# %player_message% - 訊息
+MinecraftToMinecraft:
+MinecraftToDiscord:
+DiscordToMinecraft:
