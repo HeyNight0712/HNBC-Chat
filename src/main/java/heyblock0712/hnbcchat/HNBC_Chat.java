@@ -2,7 +2,10 @@ package heyblock0712.hnbcchat;
 
 import heyblock0712.hnbcchat.cord.ConfigManager;
 import heyblock0712.hnbcchat.cord.DiscordManager;
-import heyblock0712.hnbcchat.listeners.ChatListener;
+import heyblock0712.hnbcchat.listeners.PlayerChatListener;
+import heyblock0712.hnbcchat.listeners.PlayerDisconnectListener;
+import heyblock0712.hnbcchat.listeners.PlayerLoginListener;
+import heyblock0712.hnbcchat.listeners.PlayerSwitchesServerListener;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public final class HNBC_Chat extends Plugin {
@@ -17,7 +20,10 @@ public final class HNBC_Chat extends Plugin {
 
         getProxy().registerChannel("BungeeCord");
 
-        getProxy().getPluginManager().registerListener(this, new ChatListener());
+        getProxy().getPluginManager().registerListener(this, new PlayerChatListener());
+        getProxy().getPluginManager().registerListener(this, new PlayerLoginListener());
+        getProxy().getPluginManager().registerListener(this, new PlayerDisconnectListener());
+        getProxy().getPluginManager().registerListener(this, new PlayerSwitchesServerListener());
     }
 
     @Override

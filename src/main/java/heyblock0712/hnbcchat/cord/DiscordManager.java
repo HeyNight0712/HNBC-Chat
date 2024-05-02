@@ -8,10 +8,10 @@ import net.md_5.bungee.api.plugin.Plugin;
 
 public class DiscordManager {
     private static JDA jda;
-    private static Plugin plugin = HNBC_Chat.getIntention();
+    private static final Plugin plugin = HNBC_Chat.getIntention();
 
     public static void startBot() {
-        String TOKEN = ConfigManager.getConfig().getString("BotToken");
+        String TOKEN = ConfigManager.getConfig().getString("Discord.BotToken");
         if (TOKEN == null || TOKEN.isEmpty()) {
             plugin.getLogger().info("未使用 Discord Token 默認禁用");
             return;
@@ -31,7 +31,7 @@ public class DiscordManager {
     public static void sendMessage(String channelId, String message) {
         if (jda == null) return;
         TextChannel textChannel = jda.getTextChannelById(channelId);
-        if (textChannel == null) return;
+        if (textChannel == null || message == null) return;
         textChannel.sendMessage(message).queue();
     }
 }

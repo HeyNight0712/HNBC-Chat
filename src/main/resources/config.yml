@@ -1,18 +1,78 @@
-# 機器人 TOKEN
-BotToken: ""
+# 監聽器:
+# PlayerSwitchesServer - 玩家切換分流
+# PlayerDisconnect - 玩家斷開連線
+# PlayerLogin - 玩家連線
 
-# 頻道設置
-# "global" - 全局聊天
-Channels: { "global": "" }
+# 功能:
+# Enable - 是否啟用該監聽器
+# Log - 是否顯示於後台
+# LogMessage - Log 訊息
+# Message - 遊戲內 訊息
 
-# 用於聊天格式
-# MinecraftToMinecraft - MC 到 MC
-# MinecraftToDiscord - MC 到 DC
-# DiscordToMinecraft - DC 到 MC
-# 可用的字串符
-# %server% - 該玩家伺服器 (DC TO MC 不適用)
 # %player_name% - 玩家 ID
-# %player_message% - 訊息
-MinecraftToMinecraft:
-MinecraftToDiscord:
-DiscordToMinecraft:
+# %server% - 玩家當前分流名稱
+# %player_message% - 玩家聊天訊息
+PlayerChat:
+  Enable: true
+  Log: true
+  Message: "&7%player_name% %player_message%"
+
+# %player_name% - 玩家 ID
+PlayerLogin:
+  Enable: true
+  Log: true
+  Message: "&7%player_name% 進入了伺服器"
+
+# %player_name% - 玩家 ID
+PlayerDisconnect:
+  Enable: true
+  Log: true
+  Message: "&7%player_name% 離開了伺服器"
+
+# %player_name% - 玩家 ID
+# %fromServer% - 移動前的分流名稱
+# %toServer% - 移動後的分流名稱
+PlayerSwitchesServer:
+  Enable: true
+  Log: true
+  Message: "&7%player_name% 移動至 %toServer% 分流"
+
+
+
+# Discord:
+# Enable - 是否啟用該 Discord 通知
+# Message - 訊息
+Discord:
+  # 機器人 TOKEN
+  BotToken: ""
+
+  # 頻道設置
+  # "global" - 全局聊天
+  Channels: { "Global": "" }
+
+
+  # %player_name% - 玩家 ID
+  # %server% - 玩家當前分流名稱
+  # %player_message% - 玩家聊天訊息
+  MinecraftToDiscord: "%player_name% %player_message%"
+  DiscordToMinecraft: "&7[&bDiscord&7] &f%user_name% &7%user_message%"
+
+
+  # %player_name% - 玩家 ID
+  PlayerLogin:
+    Enable: true
+    Message: "%player_name% 進入了伺服器"
+
+
+  # %player_name% - 玩家 ID
+  PlayerDisconnect:
+    Enable: true
+    Message: "%player_name% 離開了伺服器"
+
+
+  # %player_name% - 玩家 ID
+  # %fromServer% - 移動前的分流名稱
+  # %toServer% - 移動後的分流名稱
+  PlayerSwitchesServer:
+    Enable: true
+    Message: "%player_name% 從 %fromServer% 移動至 %toServer% 分流"
