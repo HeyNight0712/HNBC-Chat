@@ -14,19 +14,16 @@
 # %player_message% - 玩家聊天訊息
 PlayerChat:
   Enable: true
-  Log: true
   Message: "&7%player_name% %player_message%"
 
 # %player_name% - 玩家 ID
 PlayerLogin:
   Enable: true
-  Log: true
   Message: "&7%player_name% 進入了伺服器"
 
 # %player_name% - 玩家 ID
 PlayerDisconnect:
   Enable: true
-  Log: true
   Message: "&7%player_name% 離開了伺服器"
 
 # %player_name% - 玩家 ID
@@ -34,7 +31,6 @@ PlayerDisconnect:
 # %toServer% - 移動後的分流名稱
 PlayerSwitchesServer:
   Enable: true
-  Log: true
   Message: "&7%player_name% 移動至 %toServer% 分流"
 
 
