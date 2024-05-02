@@ -50,12 +50,14 @@ Discord:
   # "global" - 全局聊天
   Channels: { "Global": "" }
 
+  # 頭貼
+  AvatarUrl: https://cravatar.eu/head/{uuid}/128.png
 
   # %player_name% - 玩家 ID
   # %server% - 玩家當前分流名稱
   # %player_message% - 玩家聊天訊息
-  MinecraftToDiscord: "%player_name% %player_message%"
   DiscordToMinecraft: "&7[&bDiscord&7] &f%user_name% &7%user_message%"
+  MinecraftToDiscord: "%player_name% %player_message%"
 
 
   # %player_name% - 玩家 ID

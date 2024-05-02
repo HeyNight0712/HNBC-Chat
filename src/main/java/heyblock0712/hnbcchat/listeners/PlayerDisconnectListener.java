@@ -23,12 +23,9 @@ public class PlayerDisconnectListener implements Listener {
         if (ConfigManager.getConfig().getBoolean("PlayerDisconnect.Enable", true)) {
             formatMessage = new TextComponent(player.getName() + " 離開了伺服器");
             MessageManager.channelMessage(formatMessage);
-        }
-
-        // Log
-        if (ConfigManager.getConfig().getBoolean("PlayerDisconnect.Log", true)) {
             HNBC_Chat.getIntention().getLogger().info(player.getName() + " 離開了伺服器");
         }
+
 
         // Discord
         if (ConfigManager.getConfig().getBoolean("Discord.PlayerDisconnect.Enable", true)) {

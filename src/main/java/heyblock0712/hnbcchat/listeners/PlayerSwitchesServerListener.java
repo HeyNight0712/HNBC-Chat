@@ -30,12 +30,9 @@ public class PlayerSwitchesServerListener implements Listener {
         if (ConfigManager.getConfig().getBoolean("PlayerSwitchesServer.Enable", true)) {
             formatMessage = new TextComponent(player.getName() + " " + fromServer.getName() + " 移動到 " + toServer.getName());
             MessageManager.channelMessage(formatMessage);
-        }
-
-        // Log
-        if (ConfigManager.getConfig().getBoolean("PlayerDisconnect.Log", true)) {
             HNBC_Chat.getIntention().getLogger().info(player.getName() + " " + fromServer.getName() + " 移動到 " + toServer.getName());
         }
+
 
         // Discord
         if (ConfigManager.getConfig().getBoolean("Discord.PlayerDisconnect.Enable", true)) {

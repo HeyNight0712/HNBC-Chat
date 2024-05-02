@@ -22,12 +22,9 @@ public class PlayerLoginListener implements Listener {
         if (ConfigManager.getConfig().getBoolean("PlayerLogin.Enable", true)) {
             formatMessage = new TextComponent(player.getName() + " 加入了伺服器");
             MessageManager.channelMessage(formatMessage);
-        }
-
-        // Log
-        if (ConfigManager.getConfig().getBoolean("PlayerLogin.Log", true)) {
             HNBC_Chat.getIntention().getLogger().info(player.getName() + " 加入了伺服器");
         }
+
 
         // Discord
         if (ConfigManager.getConfig().getBoolean("Discord.PlayerLogin.Enable", true)) {

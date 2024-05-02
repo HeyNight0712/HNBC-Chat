@@ -30,10 +30,6 @@ public class PlayerChatListener implements Listener {
             // MC
             if (!ConfigManager.getConfig().getBoolean("PlayerChat.Enable", true)) {
                 MessageManager.channelMessage(serverName, formatMessage);
-            }
-
-            // Log
-            if (ConfigManager.getConfig().getBoolean("PlayerChat.Log", true)) {
                 HNBC_Chat.getIntention().getLogger().info(formatMessage.getText());
             }
 
