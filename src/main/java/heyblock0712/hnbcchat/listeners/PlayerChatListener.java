@@ -52,4 +52,5 @@ public class PlayerChatListener implements Listener {
         configMessage = ChatColor.translateAlternateColorCodes('&', configMessage);
         return new TextComponent(configMessage);
     }
+
 }

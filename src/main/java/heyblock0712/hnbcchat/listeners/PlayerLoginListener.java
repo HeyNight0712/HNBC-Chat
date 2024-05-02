@@ -4,6 +4,7 @@ import heyblock0712.hnbcchat.HNBC_Chat;
 import heyblock0712.hnbcchat.cord.ConfigManager;
 import heyblock0712.hnbcchat.cord.DiscordManager;
 import heyblock0712.hnbcchat.utils.MessageManager;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -41,5 +42,9 @@ public class PlayerLoginListener implements Listener {
                 .replace("%player_name%", player.getName());
         configMessage = ChatColor.translateAlternateColorCodes('&', configMessage);
         return new TextComponent(configMessage);
+    }
+
+    private EmbedBuilder embed() {
+        return new EmbedBuilder();
     }
 }

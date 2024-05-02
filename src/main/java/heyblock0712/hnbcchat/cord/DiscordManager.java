@@ -1,6 +1,7 @@
 package heyblock0712.hnbcchat.cord;
 
 import heyblock0712.hnbcchat.HNBC_Chat;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -33,5 +34,17 @@ public class DiscordManager {
         TextChannel textChannel = jda.getTextChannelById(channelId);
         if (textChannel == null || message == null) return;
         textChannel.sendMessage(message).queue();
+    }
+
+    public static void sendMessage(String channelId, String message, EmbedBuilder embed) {
+        if (jda == null) return;
+        TextChannel textChannel = jda.getTextChannelById(channelId);
+        if (textChannel == null) return;
+        textChannel.sendMessage(message).addEmbeds(embed.build()).queue();
+    }
+
+    public static JDA getJDA() {
+        if (jda == null) return null;
+        return jda;
     }
 }

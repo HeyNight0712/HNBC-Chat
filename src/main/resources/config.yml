@@ -59,7 +59,14 @@ Discord:
   # %player_name% - 玩家 ID
   PlayerLogin:
     Enable: true
-    Message: "%player_name% 進入了伺服器"
+    Message: ""
+    Embed:
+      Enable: true
+      Color: "#00ff00"
+      Author:
+        ImageUrl: "%embedavatarurl%"
+        Name: "%player_name% 加入了伺服器"
+        Url: ""
 
 
   # %player_name% - 玩家 ID
