@@ -32,14 +32,11 @@ public class PlayerDisconnectListener implements Listener {
 
         // Discord
         if (ConfigManager.getConfig().getBoolean("Discord.PlayerDisconnect.Enable", true)) {
-            String channeID = ConfigManager.getConfig().getString("Discord.Channels.Global");
-            if (channeID == null) return; // 檢查頻道
+            String channelID = ConfigManager.getConfig().getString("Discord.Channels.Global");
+            String discordMessage = ConfigManager.getConfig().getString("Discord.PlayerDisconnect.Message");
 
-            String PlayerDisconnect = ConfigManager.getConfig().getString("Discord.PlayerDisconnect.Message");
-            if (PlayerDisconnect == null) return; // 檢查字串 如果沒有是同關閉
-
-            formatMessage = formatMessage(PlayerDisconnect);
-            DiscordManager.sendMessage(channeID, formatMessage.getText());
+            formatMessage = formatMessage(discordMessage);
+            DiscordManager.sendMessage(channelID, formatMessage.getText());
         }
     }
 

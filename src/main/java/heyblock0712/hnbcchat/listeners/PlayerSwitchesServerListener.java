@@ -39,14 +39,11 @@ public class PlayerSwitchesServerListener implements Listener {
 
         // Discord
         if (ConfigManager.getConfig().getBoolean("Discord.PlayerDisconnect.Enable", true)) {
-            String channeID = ConfigManager.getConfig().getString("Discord.Channels.Global");
-            if (channeID == null) return; // 檢查頻道
+            String channelID = ConfigManager.getConfig().getString("Discord.Channels.Global");
+            String discordMessage = ConfigManager.getConfig().getString("Discord.PlayerSwitchesServer.Message");
 
-            String PlayerSwitchesServer = ConfigManager.getConfig().getString("Discord.PlayerSwitchesServer.Message");
-            if (PlayerSwitchesServer == null) return; // 檢查字串 如果沒有是同關閉
-
-            formatMessage = formatMessage(PlayerSwitchesServer);
-            DiscordManager.sendMessage(channeID, formatMessage.getText());
+            formatMessage = formatMessage(discordMessage);
+            DiscordManager.sendMessage(channelID, formatMessage.getText());
         }
     }
 
