@@ -2,7 +2,8 @@
 
 ---
 
-想法來自 [DiscordSRV](https://www.spigotmc.org/resources/discordsrv.18494/) Minecraft BungeeCord 實現
+想法來自 [DiscordSRV](https://www.spigotmc.org/resources/discordsrv.18494/) Minecraft Discord 實現
+
 
 ![image.png](https://cdn.discordapp.com/attachments/1235774773192298576/1235774838937747526/image.png?ex=66359881&is=66344701&hm=a3b8950b6930235a9f0a6f6037e45dedfba4ac3864585a050c917e7c0601f2f4&)
 
