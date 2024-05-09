@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public class DiscordManager {
@@ -20,6 +21,7 @@ public class DiscordManager {
 
         try {
             jda = JDABuilder.createDefault(TOKEN)
+                    .enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.MESSAGE_CONTENT)
                     .build();
         } catch (Exception e) {
             plugin.getLogger().warning("你輸入的 TOKEN 錯誤 默認禁用: " + e.getMessage());
