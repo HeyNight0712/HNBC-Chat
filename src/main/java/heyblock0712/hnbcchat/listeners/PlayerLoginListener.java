@@ -13,38 +13,15 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
 public class PlayerLoginListener implements Listener {
-    private ProxiedPlayer player;
+
     @EventHandler
     public void onPlayerJoin(PostLoginEvent event) {
-        player = event.getPlayer();
-        TextComponent formatMessage;
+        if (!ConfigManager.getConfig().getBoolean("PlayerLogin.Enable", true)) return; // 是否啟用
 
-        // MC
-        if (ConfigManager.getConfig().getBoolean("PlayerLogin.Enable", true)) {
-            formatMessage = new TextComponent(player.getName() + " 加入了伺服器");
-            MessageManager.channelMessage(formatMessage);
-            HNBC_Chat.getIntention().getLogger().info(player.getName() + " 加入了伺服器");
-        }
+        ProxiedPlayer player = event.getPlayer();
 
-
-        // Discord
-        if (ConfigManager.getConfig().getBoolean("Discord.PlayerLogin.Enable", true)) {
-            String channelID = ConfigManager.getConfig().getString("Discord.Channels.Global");
-            String discordMessage = ConfigManager.getConfig().getString("Discord.PlayerLogin.Message");
-
-            formatMessage = formatMessage(discordMessage);
-            DiscordManager.sendMessage(channelID, formatMessage.getText());
-        }
-    }
-
-    private TextComponent formatMessage(String configMessage) {
-        configMessage = configMessage
-                .replace("%player_name%", player.getName());
-        configMessage = ChatColor.translateAlternateColorCodes('&', configMessage);
-        return new TextComponent(configMessage);
-    }
-
-    private EmbedBuilder embed() {
-        return new EmbedBuilder();
+        TextComponent formatMessage = new TextComponent(player.getName() + " 加入了伺服器");
+        MessageManager.channelMessage(formatMessage);
+        HNBC_Chat.getIntention().getLogger().info(player.getName() + " 加入了伺服器");
     }
 }
