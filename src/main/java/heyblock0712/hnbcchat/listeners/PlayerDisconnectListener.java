@@ -12,35 +12,15 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
 public class PlayerDisconnectListener implements Listener {
-    private ProxiedPlayer player;
 
     @EventHandler
     public void onPlayerDisconnect(PlayerDisconnectEvent event) {
-        player = event.getPlayer();
-        TextComponent formatMessage;
+        if (!ConfigManager.getConfig().getBoolean("PlayerDisconnect.Enable", true)) return; // 是否啟用
 
-        // MC
-        if (ConfigManager.getConfig().getBoolean("PlayerDisconnect.Enable", true)) {
-            formatMessage = new TextComponent(player.getName() + " 離開了伺服器");
-            MessageManager.channelMessage(formatMessage);
-            HNBC_Chat.getIntention().getLogger().info(player.getName() + " 離開了伺服器");
-        }
+        ProxiedPlayer player = event.getPlayer();
 
-
-        // Discord
-        if (ConfigManager.getConfig().getBoolean("Discord.PlayerDisconnect.Enable", true)) {
-            String channelID = ConfigManager.getConfig().getString("Discord.Channels.Global");
-            String discordMessage = ConfigManager.getConfig().getString("Discord.PlayerDisconnect.Message");
-
-            formatMessage = formatMessage(discordMessage);
-            DiscordManager.sendMessage(channelID, formatMessage.getText());
-        }
-    }
-
-    private TextComponent formatMessage(String configMessage) {
-        configMessage = configMessage
-                .replace("%player_name%", player.getName());
-        configMessage = ChatColor.translateAlternateColorCodes('&', configMessage);
-        return new TextComponent(configMessage);
+        TextComponent formatMessage = new TextComponent(player.getName() + " 離開了伺服器");
+        MessageManager.channelMessage(formatMessage);
+        HNBC_Chat.getIntention().getLogger().info(formatMessage.getText());
     }
 }
