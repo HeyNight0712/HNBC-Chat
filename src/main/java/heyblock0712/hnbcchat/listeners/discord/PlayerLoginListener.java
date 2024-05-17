@@ -2,6 +2,7 @@ package heyblock0712.hnbcchat.listeners.discord;
 
 import heyblock0712.hnbcchat.cord.ConfigManager;
 import heyblock0712.hnbcchat.cord.DiscordManager;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -22,5 +23,6 @@ public class PlayerLoginListener implements Listener {
 
         String message = player.getName() + " 加入了伺服器";
         DiscordManager.sendMessage(channelID, message);
+        DiscordManager.channelEdit(channelID, ProxyServer.getInstance().getOnlineCount() + " 人在伺服器中");
     }
 }

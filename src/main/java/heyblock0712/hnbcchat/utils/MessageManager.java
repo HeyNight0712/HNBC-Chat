@@ -1,5 +1,6 @@
 package heyblock0712.hnbcchat.utils;
 
+import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -24,7 +25,7 @@ public class MessageManager {
      */
     public static void channelMessage(TextComponent message) {
         for (ProxiedPlayer recipient : ProxyServer.getInstance().getPlayers()) {
-            recipient.sendMessage(message);
+            recipient.sendMessage(new TextComponent(message));
         }
     }
 }

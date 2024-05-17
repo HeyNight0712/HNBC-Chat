@@ -37,6 +37,7 @@ public final class HNBC_Chat extends Plugin {
             getProxy().getPluginManager().registerListener(this, new heyblock0712.hnbcchat.listeners.discord.MinecraftToDiscordMessageListener(channelId));
             getProxy().getPluginManager().registerListener(this, new heyblock0712.hnbcchat.listeners.discord.PlayerLoginListener(channelId));
             getProxy().getPluginManager().registerListener(this, new heyblock0712.hnbcchat.listeners.discord.ServerSwitchListener(channelId));
+            getProxy().getPluginManager().registerListener(this, new heyblock0712.hnbcchat.listeners.discord.PlayerDisconnectListener(channelId));
         }
     }
 
