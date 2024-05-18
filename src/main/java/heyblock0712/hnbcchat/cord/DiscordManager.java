@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.requests.restaction.ChannelAction;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public class DiscordManager {
@@ -37,6 +36,13 @@ public class DiscordManager {
         TextChannel textChannel = jda.getTextChannelById(channelId);
         if (textChannel == null || message == null) return;
         textChannel.sendMessage(message).queue();
+    }
+
+    public static void sendMessage(String channelId, EmbedBuilder embed) {
+        if (jda == null) return;
+        TextChannel textChannel = jda.getTextChannelById(channelId);
+        if (textChannel == null || embed == null) return;
+        textChannel.sendMessageEmbeds(embed.build()).queue();
     }
 
     public static void channelEdit(String channelId, String message) {

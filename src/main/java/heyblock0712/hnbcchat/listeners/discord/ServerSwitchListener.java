@@ -2,11 +2,14 @@ package heyblock0712.hnbcchat.listeners.discord;
 
 import heyblock0712.hnbcchat.cord.ConfigManager;
 import heyblock0712.hnbcchat.cord.DiscordManager;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ServerSwitchEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+
+import java.awt.*;
 
 public class ServerSwitchListener implements Listener {
     private static String channelID;
@@ -25,7 +28,12 @@ public class ServerSwitchListener implements Listener {
 
         if (fromServer == null) return; // 過濾 登入玩家
 
-        String message = player.getName() + "從 " + fromServer.getName() + " 移動至 " + toServer.getName();
-        DiscordManager.sendMessage(channelID, message);
+        String message = player.getName() + " 從 " + fromServer.getName() + " » " + toServer.getName();
+
+        EmbedBuilder embed = new EmbedBuilder();
+        embed.setAuthor(message, null, "https://mineskin.eu/helm/" + player.getName());
+        embed.setColor(Color.YELLOW);
+
+        DiscordManager.sendMessage(channelID, embed);
     }
 }

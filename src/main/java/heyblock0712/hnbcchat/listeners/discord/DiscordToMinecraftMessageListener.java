@@ -3,6 +3,7 @@ package heyblock0712.hnbcchat.listeners.discord;
 import heyblock0712.hnbcchat.HNBC_Chat;
 import heyblock0712.hnbcchat.cord.DiscordManager;
 import heyblock0712.hnbcchat.utils.MessageManager;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
@@ -12,6 +13,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.awt.*;
 import java.util.List;
@@ -36,7 +38,7 @@ public class DiscordToMinecraftMessageListener extends ListenerAdapter {
         Member member = event.getMember();
         String username = member != null ? member.getEffectiveName() : event.getAuthor().getName();
 
-        if (message.contains("玩家列表")) {
+        if (message.startsWith("玩家列表")) {
             playerList();
             return;
         }
@@ -59,9 +61,14 @@ public class DiscordToMinecraftMessageListener extends ListenerAdapter {
         // textComponent
         TextComponent textComponent = new TextComponent("[");
         textComponent.setColor(ChatColor.WHITE);
-        textComponent.addExtra("Discord");
-        textComponent.addExtra("] " + username + " » " + message);
-        textComponent.getExtra().get(0).setColor(ChatColor.of(highestRoleColor));
+
+        TextComponent discordComponent = new TextComponent("Discord");
+        discordComponent.setColor(ChatColor.of(highestRoleColor));
+        textComponent.addExtra(discordComponent);
+
+        TextComponent messageComponent = new TextComponent("] " + username + " » " + message);
+        messageComponent.setColor(ChatColor.WHITE);
+        textComponent.addExtra(messageComponent);
 
         // Message
         MessageManager.channelMessage(textComponent);
@@ -81,24 +88,27 @@ public class DiscordToMinecraftMessageListener extends ListenerAdapter {
     private void playerList() {
         // get all Player Count
         int globalPlayerCount = ProxyServer.getInstance().getOnlineCount();
-        StringBuilder message = new StringBuilder("線上玩家: " + globalPlayerCount + "\n");
+
+        // Embed
+        EmbedBuilder embed = new EmbedBuilder();
+        embed.setColor(Color.decode("#00FFD5"));
+        embed.setTitle("玩家列表");
+        embed.setDescription("線上總玩家: " + globalPlayerCount);
 
         // get server Player Count
         Map<String, ServerInfo> servers = ProxyServer.getInstance().getServers();
         for (Map.Entry<String, ServerInfo> entny : servers.entrySet()) {
             ServerInfo server = entny.getValue();
             int playersOnServer = server.getPlayers().size();
-            message.append("分流 ").append(entny.getKey()).append(" 上的玩家數: ").append(playersOnServer).append("\n");
+
+            StringBuilder playerName = new StringBuilder();
+            for (ProxiedPlayer player: server.getPlayers()) {
+                playerName.append("`").append(player.getName()).append("`").append("\n");
+            }
+
+            embed.addField("分流 " + entny.getKey() + " 上的玩家數: " + playersOnServer, playerName.toString(), false);
         }
 
-        DiscordManager.sendMessage(channelID, message.toString());
-    }
-
-    /**
-     * 設置 channelID
-     * @param channelID channelID
-     */
-    public static void setChannelID(String channelID) {
-        DiscordToMinecraftMessageListener.channelID = channelID;
+        DiscordManager.sendMessage(channelID, embed);
     }
 }
